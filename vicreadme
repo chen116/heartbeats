@@ -1,0 +1,161 @@
+my modification:
+
+in heartbeats/src/heartbeat-shared.c
+
+in fuction:
+heartbeat_t* heartbeat_init(int64_t window_size,
+                            int64_t buffer_depth,
+                            const char* log_name,
+                            double min_target,
+                            double max_target) {
+
+add:
+
+int vic_shm_id = atoi(getenv("VIC_SHM_ID"));
+
+change:
+
+  hb->state = HB_alloc_state(vic_shm_id);
+  hb->log = HB_alloc_log(vic_shm_id, buffer_depth);
+
+
+compile and stuff at heartbeats/
+
+
+sudo make clean && sudo make uninstall && sudo make && sudo make install && sudo ldconfig
+
+
+when starting your docker:
+
+sudo docker run -e VIC_SHM_ID='1234' --ipc host --cpus 4 --name v4 -d -t chen116/hb-test
+
+go into docker run your thing:
+
+two way to access shm at host:
+
+1. use c
+2. use python
+
+
+
+######
+To USE:
+
+ref:
+http://people.cs.uchicago.edu/~ckimes/poet/
+https://github.com/libheartbeats/heartbeats
+git clone https://github.com/libheartbeats/heartbeats.git
+
+at hestbeat dir:
+
+$ mkdir hbed
+
+$ nano ~/.bashrc
+
+#add in this line (fix path accordinly)
+
+export HEARTBEAT_ENABLED_DIR="/path/to/heartbeats/hbed/"
+
+close terminal
+open terminal
+
+or
+
+source ~/.bashrc
+
+gogo
+
+sudo make clean && sudo make uninstall && sudo make && sudo make install && sudo ldconfig && ./bin/vic ../mibench/network/dijkstra/input.dat 
+
+
+
+
+
+
+
+to make use for myapp:
+
+after install:
+
+copy heartbeat.h  heartbeat-types.h into working dir:
+
+$ gcc -c -o vic.o myapp.c
+$ gcc -o vic vic.o -Llib -lhb-shared -lhrm-shared -lpthread -lrt -lm
+
+or just
+
+($ gcc -o vic vic.o -lhb-shared -lhrm-shared)
+$ ./vic
+
+
+
+in mapp.c put lines below in proper places
+
+#include "heartbeat.h" ( if do this make sure heartbeat.h and heatbeat-type.h in same dir)
+
+or
+
+#include <heartbeats/heartbeat.h>
+
+heartbeat_t* heart;
+
+
+
+
+
+static const int64_t vic_win_size = 10;
+static const int64_t vic_buf_depth = 1000;
+static const char* vic_log_file ="vic.log";
+static const int64_t vic_min_target = 100;
+static const int64_t vic_max_target = 1000;
+
+heart = heartbeat_init(vic_win_size, vic_buf_depth, vic_log_file, vic_min_target, vic_max_target);
+
+
+
+
+heartbeat(heart, some_int);
+
+increase some_int
+do stuff
+
+
+heartbeat_finish(heart);
+
+
+
+
+      heartbeat(heart, heartcnt++);
+      if (heartcnt % 100==0 )
+       {
+       printf("heartbeat:%d\n",heartcnt );
+       printf("heartbeat: windowed rate: %f\n",hb_get_windowed_rate(heart) );
+       printf("heartbeat: instant rate: %f\n",hb_get_instant_rate(heart) );
+
+        }
+
+DOCKER:
+
+
+so with dockerfile setup, without the CMD,
+
+sudo docker build -t chen116/hb-test . && sudo docker run --name vic -d -t chen116/hb-test
+
+sudo docker ps
+
+(find docker id)
+
+sudo docker exec -it (docker id or vic) /bin/bash
+
+go run stuff
+
+docker cp <containerId>:/file/path/within/container /host/path/target
+
+
+sudo docker stop (docker id)
+
+sudo docker ps -a | grep Created | cut -d ' ' -f 1 | xargs sudo docker rm
+sudo docker ps -a | grep Exited | cut -d ' ' -f 1 | xargs sudo docker rm
+
+
+
