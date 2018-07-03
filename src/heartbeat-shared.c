@@ -33,8 +33,8 @@ heartbeat_t* heartbeat_init(int64_t window_size,
   hb->window = NULL;
   hb->text_file = NULL;
 
-  // hb->state = HB_alloc_state(pid);
-  hb->state = HB_alloc_state(vic_shm_id);
+  hb->state = HB_alloc_state(pid);
+  // hb->state = HB_alloc_state(vic_shm_id);
 
   if (hb->state == NULL) {
     heartbeat_finish(hb);
@@ -63,8 +63,8 @@ heartbeat_t* heartbeat_init(int64_t window_size,
   snprintf(hb->filename, sizeof(hb->filename), "%s/%d", enabled_dir, hb->state->pid);
   printf("%s\n", hb->filename);
 
-  //hb->log = HB_alloc_log(hb->state->pid, buffer_depth);
-  hb->log = HB_alloc_log(vic_shm_id, buffer_depth);
+  hb->log = HB_alloc_log(hb->state->pid, buffer_depth);
+  // hb->log = HB_alloc_log(vic_shm_id, buffer_depth);
 
   if(hb->log == NULL) {
     heartbeat_finish(hb);
