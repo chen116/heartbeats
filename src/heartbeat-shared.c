@@ -12,6 +12,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <time.h>
+#include <sys/shm.h>
+
 
 heartbeat_t* heartbeat_init(int64_t window_size,
                             int64_t buffer_depth,
