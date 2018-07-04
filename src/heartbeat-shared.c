@@ -26,10 +26,13 @@ heartbeat_t* heartbeat_init(int64_t window_size,
 
 
 // meow
-  int shmid;
-if ((shmid = shmget(pid, 1*sizeof(heartbeat_t), IPC_CREAT | 0666)) < 0) {return 0;}
-heartbeat_t* hb = (heartbeat_t*) shmat(shmid, NULL, 0); 
-//heartbeat_t* hb = (heartbeat_t*) malloc(sizeof(heartbeat_t));
+// int shmid;
+// if ((shmid = shmget(pid, 1*sizeof(heartbeat_t), IPC_CREAT | 0666)) < 0) {return 0;}
+// heartbeat_t* hb = (heartbeat_t*) shmat(shmid, NULL, 0); 
+heartbeat_t* hb = (heartbeat_t*) malloc(sizeof(heartbeat_t));
+
+
+
   if (hb == NULL) {
     perror("Failed to malloc heartbeat");
     return NULL;
@@ -146,6 +149,8 @@ void heartbeat_finish(heartbeat_t* hb) {
     free(hb);
   }
 }
+
+
 
 /**
  * Helper function to compute windowed heart rate
