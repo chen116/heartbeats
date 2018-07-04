@@ -23,8 +23,10 @@ heartbeat_t* heartbeat_init(int64_t window_size,
   int vic_shm_id = atoi(getenv("VIC_SHM_ID"));
 
 
-
-  heartbeat_t* hb = (heartbeat_t*) malloc(sizeof(heartbeat_t));
+// meow
+if ((shmid = shmget(pid, 1*sizeof(heartbeat_t), IPC_CREAT | 0666)) < 0) {return 0;}
+heartbeat_t* hb = (heartbeat_t*) shmat(shmid, NULL, 0); 
+//heartbeat_t* hb = (heartbeat_t*) malloc(sizeof(heartbeat_t));
   if (hb == NULL) {
     perror("Failed to malloc heartbeat");
     return NULL;
