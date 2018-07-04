@@ -26,6 +26,7 @@ heartbeat_t* heartbeat_init(int64_t window_size,
 
 
 // meow
+  int shmid;
 if ((shmid = shmget(pid, 1*sizeof(heartbeat_t), IPC_CREAT | 0666)) < 0) {return 0;}
 heartbeat_t* hb = (heartbeat_t*) shmat(shmid, NULL, 0); 
 //heartbeat_t* hb = (heartbeat_t*) malloc(sizeof(heartbeat_t));
