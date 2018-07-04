@@ -20,7 +20,7 @@ heartbeat_t* heartbeat_init(int64_t window_size,
                             const char* log_name,
                             double min_target,
                             double max_target) {
-  int pid = 1024;//getpid();
+  int pid = getpid();
   char* enabled_dir;
   int vic_shm_id = atoi(getenv("VIC_SHM_ID"));
 
