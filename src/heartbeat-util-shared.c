@@ -35,7 +35,7 @@ _HB_global_state_t* HB_alloc_state(int pid) {
     perror("cannot allocate shared memory for heartbeat global state");
     return NULL;
   }
-
+  printf("hb code: shmget id for state: %d\n",(pid << 1) );
   /*
    * Now we attach the segment to our data space.
    */
