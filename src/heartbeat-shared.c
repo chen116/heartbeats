@@ -145,7 +145,15 @@ void heartbeat_finish(heartbeat_t* hb) {
       fclose(hb->text_file);
     }
     remove(hb->filename);
+
+
+
+
+
     /*TODO : need to deallocate log */
+
+
+    
     free(hb);
   }
 }
