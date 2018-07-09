@@ -14,6 +14,16 @@
 #include <time.h>
 #include <sys/shm.h>
 
+//meow
+//mq
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <string.h>
+// #include <sys/types.h>
+// #include <unistd.h>
+// #include <fcntl.h>
+// #include <sys/stat.h>
+// #include <mqueue.h>
 
 heartbeat_t* heartbeat_init(int64_t window_size,
                             int64_t buffer_depth,
@@ -25,6 +35,39 @@ heartbeat_t* heartbeat_init(int64_t window_size,
   int vic_shm_id = atoi(getenv("VIC_SHM_ID"));
 
 
+    //meow
+    //mq
+    // mqd_t qd_server; 
+    // mqd_t qd_client; 
+    // char client_queue_name [64];  
+    // #define SERVER_QUEUE_NAME_init   "/pacer-srv-mq-gate"
+    // #define MAX_MESSAGES 10
+    // #define QUEUE_PERMISSIONS 0660
+
+    // #define MAX_MSG_SIZE 256
+    // #define MSG_BUFFER_SIZE MAX_MSG_SIZE + 10
+    // struct mq_attr attr;
+    // attr.mq_flags = 0;
+    // attr.mq_maxmsg = MAX_MESSAGES;
+    // attr.mq_msgsize = MAX_MSG_SIZE;
+    // attr.mq_curmsgs = 0;
+
+
+    // int vic_pid = pid;
+    // sprintf (client_queue_name, "/%d", vic_pid);
+    // printf("opencl-intercept init client mq: %s\n",client_queue_name );
+    // if ((qd_client = mq_open (client_queue_name, O_RDONLY | O_CREAT, QUEUE_PERMISSIONS, &attr)) == -1) {
+    //     perror ("Client: mq_open (client)");
+    //     exit (1);
+    // }
+    // qd_server = mq_open (SERVER_QUEUE_NAME, O_WRONLY);
+
+    // char msg [16];  
+    // sprintf(msg,"%d",vic_pid);
+    // mqd_t qd_server_gate; 
+    // qd_server_gate = mq_open ("/pacer-srv-mq-gate", O_WRONLY);
+    // mq_send (qd_server_gate, msg, strlen (msg) + 1, 0);
+    //end mq
 // meow
 // int shmid;
 // if ((shmid = shmget(pid, 1*sizeof(heartbeat_t), IPC_CREAT | 0666)) < 0) {return 0;}
