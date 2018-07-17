@@ -35,7 +35,8 @@ heartbeat_t* heartbeat_init(int64_t window_size,
   // int pid = getpid();
   int pid;
   char loglog[8];
-  sscanf( loglog, "%s%d", loglog, &pid );
+  sscanf( log_name, "%s%d", loglog, &pid );
+  printf("heartbeat init with %s with pid %d\n",pid );
 
 
 
