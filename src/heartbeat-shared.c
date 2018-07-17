@@ -30,9 +30,13 @@ heartbeat_t* heartbeat_init(int64_t window_size,
                             const char* log_name,
                             double min_target,
                             double max_target,
-                            int pid) {
+                            ) {
   // 7/17/2018
   // int pid = getpid();
+  int pid;
+  char loglog[8];
+  sscanf( loglog, "%s%d", loglog, &pid );
+
 
 
 
