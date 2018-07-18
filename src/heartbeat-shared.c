@@ -29,19 +29,20 @@ heartbeat_t* heartbeat_init(int64_t window_size,
                             int64_t buffer_depth,
                             const char* log_name,
                             double min_target,
-                            double max_target
+                            double max_target, int pid
                             ) {
   // 7/17/2018
   // int pid = getpid();
-  int pid;
-  char loglog[8];
-  char pidchar[8];
-  sscanf( log_name, "%[^_]_%[^_]%s", loglog, pidchar );
-  pid = atoi(pidchar);
-  printf("heartbeat init with %s with pid %d\n",loglog,pid );
-  printf("log name: %s\n",log_name);
 
+  // int pid;
+  // char loglog[8];
+  // char pidchar[8];
+  // sscanf( log_name, "%[^_]_%[^_]%s", loglog, pidchar );
+  // pid = atoi(pidchar);
+  // printf("heartbeat init with %s with pid %d\n",loglog,pid );
+  // printf("log name: %s\n",log_name);
 
+//end meow
 
 
   char* enabled_dir;
