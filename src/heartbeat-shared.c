@@ -112,7 +112,7 @@ heartbeat_t* hb = (heartbeat_t*) malloc(sizeof(heartbeat_t));
   hb->state->pid = pid;
 
   if(log_name != NULL) {
-    hb->text_file = fopen("vic.log", "w");
+    hb->text_file = fopen(log_name, "w");
     if (hb->text_file == NULL) {
       perror("Failed to open heartbeat log file");
       heartbeat_finish(hb);
