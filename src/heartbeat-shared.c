@@ -44,7 +44,7 @@ heartbeat_t* heartbeat_init(int64_t window_size,
 
 
   char* enabled_dir;
-  int vic_shm_id = atoi(getenv("VIC_SHM_ID"));
+  // int vic_shm_id = atoi(getenv("VIC_SHM_ID"));
 
 
     //meow
