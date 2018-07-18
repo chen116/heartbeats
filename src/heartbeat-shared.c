@@ -162,6 +162,7 @@ heartbeat_t* hb = (heartbeat_t*) malloc(sizeof(heartbeat_t));
   hb->binary_file = fopen(hb->filename, "w");
   if ( hb->binary_file == NULL ) {
     perror("Failed to open heartbeat log");
+    printf("meoww\n");
     heartbeat_finish(hb);
     return NULL;
   }
