@@ -84,10 +84,10 @@ heartbeat_t* heartbeat_init(int64_t window_size,
 // int shmid;
 // if ((shmid = shmget(pid, 1*sizeof(heartbeat_t), IPC_CREAT | 0666)) < 0) {return 0;}
 // heartbeat_t* hb = (heartbeat_t*) shmat(shmid, NULL, 0); 
-  printf("meow -1 \n" );
+
 
 heartbeat_t* hb = (heartbeat_t*) malloc(sizeof(heartbeat_t));
-  printf("meow \n" );
+
 
 
 
@@ -100,7 +100,7 @@ heartbeat_t* hb = (heartbeat_t*) malloc(sizeof(heartbeat_t));
   hb->text_file = NULL;
 
   hb->state = HB_alloc_state(pid);
-  printf("meow meow\n" );
+
 
   // hb->state = HB_alloc_state(vic_shm_id);
 
