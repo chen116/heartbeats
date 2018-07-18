@@ -39,8 +39,8 @@ heartbeat_t* heartbeat_init(int64_t window_size,
   char pidchar[8];
   sscanf( log_name, "%[^_]_%[^_]%s", loglog, pidchar );
   pid = atoi(pidchar);
-  printf("heartbeat init with %s with pid %d\n",loglog,pid );
-  printf("log name: %s\n",log_name);
+  printf("heartbeat initing with %s with pid %d\n",loglog,pid );
+
 
 //end meow
 
@@ -160,7 +160,7 @@ heartbeat_t* hb = (heartbeat_t*) malloc(sizeof(heartbeat_t));
   hb->steady_state = 0;
   hb->state->valid = 0;
 
-  printf("before it fail: filename :%s\n", hb->filename);
+
   hb->binary_file = fopen(hb->filename, "w");
   if ( hb->binary_file == NULL ) {
     perror("Failed to open heartbeat log");
