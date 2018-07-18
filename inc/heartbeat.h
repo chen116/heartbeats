@@ -28,7 +28,7 @@ heartbeat_t* heartbeat_init(int64_t window_size,
                             int64_t buffer_depth,
                             const char* log_name,
                             double min_target,
-                            double max_target,int pid);
+                            double max_target);
 
 /**
  * Registers a heartbeat
